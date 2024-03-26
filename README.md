@@ -1,2 +1,2 @@
 # Jenkins
-The repository for Jenkins CI/CD pipelines
+1. The repository for Jenkins CI/CD pipelines
