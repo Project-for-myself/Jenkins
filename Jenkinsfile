@@ -27,9 +27,9 @@ pipeline {
                 script {
                     message = "SUCCESS"
                     if (message == "SUCCESS") {
-                        message = "Пайплайн виконаний успішно ! 🔥🔥🔥"
+                        message = "Пайплайн виконаний успішно ! _🔥🔥🔥_"
                     } else {
-                        message = "Пайплайн завершився Хуйово ! 😭😭😭 (Щось пішло не так)"
+                        message = "Пайплайн завершився Хуйово ! _😭😭😭_ (Щось пішло не так)"
                     }
                     
                     def discordWebhookUrl = 'https://discord.com/api/webhooks/1222655463259377724/uk-NlGmSM73LAfp_vt5ym5pMbQuFH6idITp-blinD6AyI9rK_dHUw2xTxAsEJlcfeBn2'
