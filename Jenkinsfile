@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        // Define a variable to store the secret text
+        discordWebhookUrl = credentials('my_jenkin_announcementss')
+    }
     stages {
         stage("Clone Git Repository") {
             steps {
@@ -14,7 +18,7 @@ pipeline {
         
         stage('List Files') {
             steps {
-                // Виводимо всі файли з репозиторію
+                // show all files from the repository
                 script {
                     sh 'ls -la'
                 }
@@ -23,17 +27,18 @@ pipeline {
         
         stage('Send Discord Message') {
             steps {
-                // Надсилаємо повідомлення в Discord
+                // Send a message to Discord
                 script {
-                    message = "SUCCESS"
+                    def message = "SUCCESS"
                     if (message == "SUCCESS") {
-                        message = "Пайплайн виконаний успішно ! _🔥🔥🔥_"
+                        message = "Pipeline completed successfully ! _🔥🔥🔥_"
                     } else {
-                        message = "Пайплайн завершився Хуйово ! _😭😭😭_ (Щось пішло не так)"
+                        message = "Pipeline is unsuccessful ! _😭😭😭_ (Something went wrong)"
                     }
+
+                    sh "curl -X POST -H 'Content-Type: application/json' -d '{\"content\": \"${message}\"}' \"${discordWebhookUrl}\""
+                    // 14
                     
-                    def discordWebhookUrl = 'https://discord.com/api/webhooks/1222655463259377724/uk-NlGmSM73LAfp_vt5ym5pMbQuFH6idITp-blinD6AyI9rK_dHUw2xTxAsEJlcfeBn2'
-                    sh "curl -X POST -H 'Content-Type: application/json' -d '{\"content\": \"${message}\"}' ${discordWebhookUrl}"
                 }
             }
         }
